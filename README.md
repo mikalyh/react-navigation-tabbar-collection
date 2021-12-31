@@ -6,7 +6,7 @@ Collection of Animated **60 FPS** TabBar Component's based on `React Navigation`
 
 ## Features
 
-- **60 FPS** Animated
+- **60 FPS** Animation
 - Beautiful TabBar Component's
 - Based on `React Navigation` **v5** or higher
 - Easy to use
@@ -38,7 +38,7 @@ yarn add react-navigation-tabbar-collection
 > This TabBar is inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
 
 ```js
-import TabBar from 'react-navigation-tabbar-collection/ColorfulTabBar'
+import TabBar from 'react-navigation-tabbar-collection/ColorfulTabBar';
 ```
 
 ### Clean
@@ -46,7 +46,7 @@ import TabBar from 'react-navigation-tabbar-collection/ColorfulTabBar'
 > This TabBar is inspired by [Cuberto](https://dribbble.com/cuberto) works on [Dribbble](https://dribbble.com/shots/5605168-Toolbar-icons-animation).
 
 ```js
-import TabBar from 'react-navigation-tabbar-collection/CleanTabBar'
+import TabBar from 'react-navigation-tabbar-collection/CleanTabBar';
 ```
 
 ## Props
@@ -73,6 +73,7 @@ import TabBar from 'react-navigation-tabbar-collection/CleanTabBar'
     dark: "#212529",        //Foreground Color
 }
 ```
+
 > Background and Foreground Color are Inverted when the `darkMode` is `true`
 
 ## Screen Options
