@@ -72,8 +72,8 @@ import TabBar from 'react-navigation-tabbar-collection/CleanTabBar'
     light: "#ffffff",       //Background Color
     dark: "#212529",        //Foreground Color
 }
-// Background and Foreground Color are Inverted when the darkMode is `true`
 ```
+> Background and Foreground Color are Inverted when the darkMode is `true`
 
 ## Screen Options
 
