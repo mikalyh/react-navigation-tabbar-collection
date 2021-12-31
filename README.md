@@ -2,7 +2,7 @@
 
 [![License MIT](https://camo.githubusercontent.com/ceac32a7f01f2671581ada837403b74524de9120dca1ef517bd803b6beb717f6/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f6c2f40676f72686f6d2f616e696d617465642d7461626261723f7374796c653d666c61742d737175617265)]()
 
-a Collection of Animated **60 FPS** TabBar Component's based on `React Navigation`.
+Collection of Animated **60 FPS** TabBar Component's based on `React Navigation`.
 
 ## Features
 
