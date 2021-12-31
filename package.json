@@ -32,9 +32,20 @@
     "bootstrap": "yarn example && yarn && yarn pods"
   },
   "keywords": [
+    "animated-tabbar",
     "react-native",
     "ios",
-    "android"
+    "android",
+    "hybrid",
+    "react-navigation",
+    "reanimated",
+    "tabbar",
+    "tabbar-collection",
+    "tab-bar",
+    "tab-bar-collection",
+    "bottom-bar",
+    "animated-tabbar-collection",
+    "react-navigation-tabbar-collection"
   ],
   "repository": "https://github.com/mikalyh/react-navigation-tabbar-collection",
   "author": "Mikalyh <mikal.code@gmail.com> (https://github.com/mikalyh)",
@@ -53,6 +64,8 @@
     "@types/jest": "^26.0.0",
     "@types/react": "^16.9.19",
     "@types/react-native": "0.62.13",
+    "@react-navigation/bottom-tabs": "^6.0.9",
+    "@react-navigation/native": "^6.0.6",
     "commitlint": "^11.0.0",
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^7.0.0",
@@ -69,7 +82,9 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "@react-navigation/native": ">=5.0.0",
+    "@react-navigation/bottom-tabs": ">=5.0.0"
   },
   "jest": {
     "preset": "react-native",
