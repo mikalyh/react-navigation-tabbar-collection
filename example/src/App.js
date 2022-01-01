@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
 // import Icon from 'react-native-vector-icons/AntDesign'
-import TabBar from 'react-navigation-tabbar-collection';
+import TabBar from 'react-navigation-tabbar-collection/CleanTabBar';
 
 const Tab = createBottomTabNavigator();
 
