@@ -2,5 +2,8 @@ node_modules/
 .babelrc
 .eslintrc
 __tests__
-circle.yml
+.circleci/
+.husky/
 examples/
+scripts/
+lib/
