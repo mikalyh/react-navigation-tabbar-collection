@@ -1,6 +1,6 @@
-import type { ColorConfig } from './types';
+import type { ColorPaletteConfig } from './types';
 
-export const main_colors: ColorConfig = {
+export const main_colors: ColorPaletteConfig = {
   primary: '#5b37b7',
   secondary: '#6c757d',
   success: '#198754',

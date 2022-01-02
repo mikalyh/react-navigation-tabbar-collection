@@ -6,7 +6,7 @@ import type {
 import type { BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs/src/types';
 import type { BottomTabDescriptorMap } from '../types';
 import type { Animated, StyleProp, ViewStyle } from 'react-native';
-import type { ColorConfig } from '../assets/types';
+import type { ColorPaletteConfig } from '../assets/types';
 
 export type CleanTabBarConfig = {
   state: TabNavigationState<ParamListBase>;
@@ -15,7 +15,7 @@ export type CleanTabBarConfig = {
   maxWidth: number;
   height: number;
   darkMode: boolean;
-  colorPalette: ColorConfig;
+  colorPalette: ColorPaletteConfig;
 };
 
 export type TriangleConfig = {
