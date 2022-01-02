@@ -35,13 +35,13 @@ yarn add react-navigation-tabbar-collection
 
 > This TabBar is inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
 
+<img alt="ColorfulTabBar Light Mode" height="150" src="https://raw.githubusercontent.com/mikalyh/react-navigation-tabbar-collection/master/preview/colorful_light.gif" />
+
+<img alt="ColorfulTabBar Dark Mode" height="150" src="https://raw.githubusercontent.com/mikalyh/react-navigation-tabbar-collection/master/preview/colorful_dark.gif" />
+
 ```js
 import { ColorfulTabBar } from 'react-navigation-tabbar-collection';
 ```
-
-Light Mode             |  Dark Mode
-:-------------------------:|:-------------------------:
-<img alt="ColorfulTabBar Light Mode" height="150" src="https://raw.githubusercontent.com/mikalyh/react-navigation-tabbar-collection/master/preview/colorful_light.gif" />  |  <img alt="ColorfulTabBar Dark Mode" height="150" src="https://raw.githubusercontent.com/mikalyh/react-navigation-tabbar-collection/master/preview/colorful_dark.gif" />
 
 <details>
 <summary>Colorful TabBar Usage Example</summary>
