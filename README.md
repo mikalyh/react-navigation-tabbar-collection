@@ -35,6 +35,10 @@ yarn add react-navigation-tabbar-collection
 
 > This TabBar is inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
 
+<img alt="ColorfulTabBar Light Mode" height="150" src="https://raw.githubusercontent.com/mikalyh/react-navigation-tabbar-collection/master/preview/colorful_light.gif" />
+
+<img alt="ColorfulTabBar Dark Mode" height="150" src="https://raw.githubusercontent.com/mikalyh/react-navigation-tabbar-collection/master/preview/colorful_dark.gif" />
+
 ```js
 import { ColorfulTabBar } from 'react-navigation-tabbar-collection';
 ```
@@ -109,6 +113,10 @@ const styles = StyleSheet.create({
 ### Clean
 
 > This TabBar is inspired by [Cuberto](https://dribbble.com/cuberto) works on [Dribbble](https://dribbble.com/shots/5605168-Toolbar-icons-animation).
+
+<img alt="CleanTabBar Light Mode" height="150" src="https://raw.githubusercontent.com/mikalyh/react-navigation-tabbar-collection/master/preview/clean_light.gif" />
+
+<img alt="CleanTabBar Dark Mode" height="150" src="https://raw.githubusercontent.com/mikalyh/react-navigation-tabbar-collection/master/preview/clean_dark.gif" />
 
 ```js
 import { CleanTabBar } from 'react-navigation-tabbar-collection';
@@ -235,7 +243,7 @@ MIT
 
 - Animated (React Native)
 
-## Requirement
+## Requirement's
 
 | Name | Version |
 | ---- | ---- |
