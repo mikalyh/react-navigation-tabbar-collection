@@ -38,7 +38,7 @@ yarn add react-navigation-tabbar-collection
 > This TabBar is inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
 
 ```js
-import TabBar from 'react-navigation-tabbar-collection/ColorfulTabBar';
+import { ColorfulTabBar } from 'react-navigation-tabbar-collection';
 ```
 
 ### Clean
@@ -46,7 +46,7 @@ import TabBar from 'react-navigation-tabbar-collection/ColorfulTabBar';
 > This TabBar is inspired by [Cuberto](https://dribbble.com/cuberto) works on [Dribbble](https://dribbble.com/shots/5605168-Toolbar-icons-animation).
 
 ```js
-import TabBar from 'react-navigation-tabbar-collection/CleanTabBar';
+import { CleanTabBar } from 'react-navigation-tabbar-collection';
 ```
 
 ## Props
