@@ -16,7 +16,6 @@ Collection of Animated **60 FPS** TabBar Component's based on `React Navigation`
 ## Installation
 
 >This TabBar Collection based on `@react-navigation/bottom-tabs` and require `React Navigation v5 or higher` so first thing first you must install [@react-navigation/native](https://reactnavigation.org/docs/getting-started/) and [@react-navigation/bottom-tabs](https://reactnavigation.org/docs/tab-based-navigation/) in your project.
-> Please always see the React Navigation documentation for complete installation guide
 
 ##### via NPM
 
