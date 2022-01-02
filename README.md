@@ -40,15 +40,15 @@ import { ColorfulTabBar } from 'react-navigation-tabbar-collection';
 ```
 
 <details>
-<summary>Colorful TabBar Usage</summary>
+<summary>Colorful TabBar Usage Example</summary>
 
 ```js
-import React from 'react'
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
 import { ColorfulTabBar as TabBar } from 'react-navigation-tabbar-collection';
-import Icon from 'react-native-vector-icons/AntDesign'
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const Tab = createBottomTabNavigator();
 
@@ -115,15 +115,15 @@ import { CleanTabBar } from 'react-navigation-tabbar-collection';
 ```
 
 <details>
-<summary>Clean TabBar Usage</summary>
+<summary>Clean TabBar Usage Example</summary>
 
 ```js
-import React from 'react'
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
 import { CleanTabBar as TabBar } from 'react-navigation-tabbar-collection';
-import Icon from 'react-native-vector-icons/AntDesign'
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const Tab = createBottomTabNavigator();
 
@@ -234,3 +234,10 @@ MIT
 ## Built With
 
 - Animated (React Native)
+
+## Requirement
+
+| Name | Version |
+| ---- | ---- |
+| [@react-navigation/native](https://reactnavigation.org/docs/getting-started/) | >=5.0.0 |
+| [@react-navigation/bottom-tabs](https://reactnavigation.org/docs/tab-based-navigation/) | >=5.0.0 |
