@@ -2,8 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
-// import Icon from 'react-native-vector-icons/AntDesign'
-import TabBar from 'react-navigation-tabbar-collection/CleanTabBar';
+import Icon from 'react-native-vector-icons/AntDesign'
+import {CleanTabBar} from 'react-navigation-tabbar-collection';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,14 +19,14 @@ const App = () => {
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={{ headerShown: false }}
-        tabBar={(props) => <TabBar {...props} />}
+        tabBar={(props) => <CleanTabBar {...props} />}
       >
         <Tab.Screen
           name="Home"
           component={DemoScreen}
           options={{
             title: 'Home',
-            // icon: ({focused, color, size}) => <Icon name="home" size={size} color={color} />,
+            icon: ({focused, color, size}) => <Icon name="home" size={size} color={color} />,
             color: 'primary',
           }}
         />
@@ -35,7 +35,7 @@ const App = () => {
           component={DemoScreen}
           options={{
             title: 'News',
-            // icon: ({focused, color, size}) => <Icon name="sharealt" size={size} color={color} />,
+            icon: ({focused, color, size}) => <Icon name="sharealt" size={size} color={color} />,
             color: 'info',
           }}
         />
@@ -44,7 +44,7 @@ const App = () => {
           component={DemoScreen}
           options={{
             title: 'Chat',
-            // icon: ({focused, color, size}) => <Icon name="API" size={size} color={color} />,
+            icon: ({focused, color, size}) => <Icon name="API" size={size} color={color} />,
             color: 'warning',
           }}
         />
@@ -53,7 +53,7 @@ const App = () => {
           component={DemoScreen}
           options={{
             title: 'Likes',
-            // icon: ({focused, color, size}) => <Icon name="hearto" size={size} color={color} />,
+            icon: ({focused, color, size}) => <Icon name="hearto" size={size} color={color} />,
             color: 'danger',
           }}
         />
@@ -62,7 +62,7 @@ const App = () => {
           component={DemoScreen}
           options={{
             title: 'Settings',
-            // icon: ({focused, color, size}) => <Icon name="setting" size={size} color={color} />,
+            icon: ({focused, color, size}) => <Icon name="setting" size={size} color={color} />,
             color: 'success',
           }}
         />
