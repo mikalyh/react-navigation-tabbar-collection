@@ -39,8 +39,9 @@ yarn add react-navigation-tabbar-collection
 ```js
 import { ColorfulTabBar } from 'react-navigation-tabbar-collection';
 ```
+
 <details>
-    <summary>Colorful TabBar Usage</summary>
+<summary>Colorful TabBar Usage</summary>
 
     ```js
     import React from 'react'
@@ -61,7 +62,7 @@ import { ColorfulTabBar } from 'react-navigation-tabbar-collection';
     const App = () => {
         return (
             <NavigationContainer>
-                <Tab.Navigator initialRouteName='Home' screenOptions={{headerShown: false}} tabBar={(props) => <TabBar {...props} />}>
+                <Tab.Navigator initialRouteName='Home' tabBar={(props) => <TabBar {...props} />}>
                     <Tab.Screen name='Home' component={DemoScreen} options={{
                         title: 'Home',
                         icon: ({focused, color, size}) => <Icon name='home' size={size} color={color} />,
@@ -115,7 +116,7 @@ import { CleanTabBar } from 'react-navigation-tabbar-collection';
 ```
 
 <details>
-    <summary>Clean TabBar Usage</summary>
+<summary>Clean TabBar Usage</summary>
 
     ```js
     import React from 'react'
@@ -136,7 +137,7 @@ import { CleanTabBar } from 'react-navigation-tabbar-collection';
     const App = () => {
         return (
             <NavigationContainer>
-                <Tab.Navigator initialRouteName='Home' screenOptions={{headerShown: false}} tabBar={(props) => <TabBar {...props} />}>
+                <Tab.Navigator initialRouteName='Home' tabBar={(props) => <TabBar {...props} />}>
                     <Tab.Screen name='Home' component={DemoScreen} options={{
                         title: 'Home',
                         icon: ({focused, color, size}) => <Icon name='home' size={size} color={color} />,
