@@ -53,6 +53,7 @@ export const CleanStyle = StyleSheet.create({
   item: {
     flex: 1,
     flexDirection: 'row',
+    overflow: 'hidden'
   },
   touchableItem: {
     flex: 1,
@@ -72,6 +73,7 @@ export const CleanStyle = StyleSheet.create({
   filterIcon: {
     zIndex: 2,
     position: 'absolute',
+    width: '100%'
   },
   itemTextLayer: {
     zIndex: 3,
@@ -84,7 +86,8 @@ export const CleanStyle = StyleSheet.create({
   filterText: {
     zIndex: 4,
     position: 'absolute',
-    bottom: 0,
+    bottom: -5,
+    width: '100%',
   },
   triangleTop: {
     width: '100%',
@@ -92,7 +95,7 @@ export const CleanStyle = StyleSheet.create({
     backgroundColor: 'transparent',
     borderStyle: 'solid',
     borderTopWidth: 0,
-    borderRightWidth: 100,
+    borderRightWidth: 180,
     borderBottomWidth: 20,
     borderLeftWidth: 0,
     borderTopColor: 'transparent',
