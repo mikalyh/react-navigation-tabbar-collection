@@ -15,7 +15,7 @@ Collection of Animated **60 FPS** TabBar Component's based on `React Navigation`
 
 ## Installation
 
->This TabBar Collection based on `@react-navigation/bottom-tabs` and require `React Navigation v5 or higher` so first thing first you must install [@react-navigation/native](https://reactnavigation.org/docs/getting-started/) and [@react-navigation/bottom-tabs](https://reactnavigation.org/docs/tab-based-navigation/) in your project.
+> This TabBar Collection based on `@react-navigation/bottom-tabs` and require `React Navigation v5 or higher` so first thing first you must install [@react-navigation/native](https://reactnavigation.org/docs/getting-started/) and [@react-navigation/bottom-tabs](https://reactnavigation.org/docs/tab-based-navigation/) in your project.
 
 ##### via NPM
 
@@ -40,7 +40,22 @@ yarn add react-navigation-tabbar-collection
 <img alt="ColorfulTabBar Dark Mode" height="150" src="https://raw.githubusercontent.com/mikalyh/react-navigation-tabbar-collection/master/preview/colorful_dark.gif" />
 
 ```js
+//Import the TabBar
 import { ColorfulTabBar } from 'react-navigation-tabbar-collection';
+
+//Your Code ....
+
+const App = () => {
+    return (
+        <NavigationContainer>
+            <Tab.Navigator
+                tabBar={(props) => <ColorfulTabBar {...props} />} //<- Add Here
+            >
+                // Your Screens Here ~
+            </Tab.Navigator>
+        </NavigatorContainer>
+    )
+}
 ```
 
 <details>
@@ -48,66 +63,100 @@ import { ColorfulTabBar } from 'react-navigation-tabbar-collection';
 
 ```js
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
-import { ColorfulTabBar as TabBar } from 'react-navigation-tabbar-collection';
+import { ColorfulTabBar } from 'react-navigation-tabbar-collection';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const Tab = createBottomTabNavigator();
 
-const DemoScreen = ({route}) => (
-    <View style={styles.screen}>
-        <Text>{route.name}</Text>
-    </View>
-)
+const DemoScreen = ({ route }) => (
+  <View style={styles.screen}>
+    <Text>{route.name}</Text>
+  </View>
+);
 
 const App = () => {
-    return (
-        <NavigationContainer>
-            <Tab.Navigator initialRouteName='Home' tabBar={(props) => <TabBar {...props} />}>
-                <Tab.Screen name='Home' component={DemoScreen} options={{
-                    title: 'Home',
-                    icon: ({focused, color, size}) => <Icon name='home' size={size} color={color} />,
-                    color: 'primary'
-                }} />
-                <Tab.Screen name='News' component={DemoScreen} options={{
-                    title: 'News',
-                    icon: ({focused, color, size}) => <Icon name='sharealt' size={size} color={color} />,
-                    color: 'info',
-                }} />
-                <Tab.Screen name='Chat' component={DemoScreen} options={{
-                    title: 'Chat',
-                    icon: ({focused, color, size}) => <Icon name='API' size={size} color={color} />,
-                    color: 'warning',
-                }} />
-                <Tab.Screen name='Likes' component={DemoScreen} options={{
-                    title: 'Likes',
-                    icon: ({focused, color, size}) => <Icon name='hearto' size={size} color={color} />,
-                    color: 'danger'
-                }} />
-                <Tab.Screen name='Settings' component={DemoScreen} options={{
-                    title: 'Settings',
-                    icon: ({focused, color, size}) => <Icon name='setting' size={size} color={color} />,
-                    color: 'success'
-                }} />
-            </Tab.Navigator>
-        </NavigationContainer>
-    )
-}
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        initialRouteName="Home"
+        tabBar={(props) => <ColorfulTabBar {...props} />}
+      >
+        <Tab.Screen
+          name="Home"
+          component={DemoScreen}
+          options={{
+            title: 'Home',
+            icon: ({ focused, color, size }) => (
+              <Icon name="home" size={size} color={color} />
+            ),
+            color: 'primary',
+          }}
+        />
+        <Tab.Screen
+          name="News"
+          component={DemoScreen}
+          options={{
+            title: 'News',
+            icon: ({ focused, color, size }) => (
+              <Icon name="sharealt" size={size} color={color} />
+            ),
+            color: 'info',
+          }}
+        />
+        <Tab.Screen
+          name="Chat"
+          component={DemoScreen}
+          options={{
+            title: 'Chat',
+            icon: ({ focused, color, size }) => (
+              <Icon name="API" size={size} color={color} />
+            ),
+            color: 'warning',
+          }}
+        />
+        <Tab.Screen
+          name="Likes"
+          component={DemoScreen}
+          options={{
+            title: 'Likes',
+            icon: ({ focused, color, size }) => (
+              <Icon name="hearto" size={size} color={color} />
+            ),
+            color: 'danger',
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={DemoScreen}
+          options={{
+            title: 'Settings',
+            icon: ({ focused, color, size }) => (
+              <Icon name="setting" size={size} color={color} />
+            ),
+            color: 'success',
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+};
 
-export default App
+export default App;
 
 const styles = StyleSheet.create({
-    screen: {
-        width: '100%',
-        height: '100%',
-        flex: 6,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
+  screen: {
+    width: '100%',
+    height: '100%',
+    flex: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 ```
+
 </details>
 
 ### Clean
@@ -127,66 +176,100 @@ import { CleanTabBar } from 'react-navigation-tabbar-collection';
 
 ```js
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
-import { CleanTabBar as TabBar } from 'react-navigation-tabbar-collection';
+import { CleanTabBar } from 'react-navigation-tabbar-collection';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const Tab = createBottomTabNavigator();
 
-const DemoScreen = ({route}) => (
-    <View style={styles.screen}>
-        <Text>{route.name}</Text>
-    </View>
-)
+const DemoScreen = ({ route }) => (
+  <View style={styles.screen}>
+    <Text>{route.name}</Text>
+  </View>
+);
 
 const App = () => {
-    return (
-        <NavigationContainer>
-            <Tab.Navigator initialRouteName='Home' tabBar={(props) => <TabBar {...props} />}>
-                <Tab.Screen name='Home' component={DemoScreen} options={{
-                    title: 'Home',
-                    icon: ({focused, color, size}) => <Icon name='home' size={size} color={color} />,
-                    color: 'primary'
-                }} />
-                <Tab.Screen name='News' component={DemoScreen} options={{
-                    title: 'News',
-                    icon: ({focused, color, size}) => <Icon name='sharealt' size={size} color={color} />,
-                    color: 'info',
-                }} />
-                <Tab.Screen name='Chat' component={DemoScreen} options={{
-                    title: 'Chat',
-                    icon: ({focused, color, size}) => <Icon name='API' size={size} color={color} />,
-                    color: 'warning',
-                }} />
-                <Tab.Screen name='Likes' component={DemoScreen} options={{
-                    title: 'Likes',
-                    icon: ({focused, color, size}) => <Icon name='hearto' size={size} color={color} />,
-                    color: 'danger'
-                }} />
-                <Tab.Screen name='Settings' component={DemoScreen} options={{
-                    title: 'Settings',
-                    icon: ({focused, color, size}) => <Icon name='setting' size={size} color={color} />,
-                    color: 'success'
-                }} />
-            </Tab.Navigator>
-        </NavigationContainer>
-    )
-}
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        initialRouteName="Home"
+        tabBar={(props) => <CleanTabBar {...props} />}
+      >
+        <Tab.Screen
+          name="Home"
+          component={DemoScreen}
+          options={{
+            title: 'Home',
+            icon: ({ focused, color, size }) => (
+              <Icon name="home" size={size} color={color} />
+            ),
+            color: 'primary',
+          }}
+        />
+        <Tab.Screen
+          name="News"
+          component={DemoScreen}
+          options={{
+            title: 'News',
+            icon: ({ focused, color, size }) => (
+              <Icon name="sharealt" size={size} color={color} />
+            ),
+            color: 'info',
+          }}
+        />
+        <Tab.Screen
+          name="Chat"
+          component={DemoScreen}
+          options={{
+            title: 'Chat',
+            icon: ({ focused, color, size }) => (
+              <Icon name="API" size={size} color={color} />
+            ),
+            color: 'warning',
+          }}
+        />
+        <Tab.Screen
+          name="Likes"
+          component={DemoScreen}
+          options={{
+            title: 'Likes',
+            icon: ({ focused, color, size }) => (
+              <Icon name="hearto" size={size} color={color} />
+            ),
+            color: 'danger',
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={DemoScreen}
+          options={{
+            title: 'Settings',
+            icon: ({ focused, color, size }) => (
+              <Icon name="setting" size={size} color={color} />
+            ),
+            color: 'success',
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+};
 
-export default App
+export default App;
 
 const styles = StyleSheet.create({
-    screen: {
-        width: '100%',
-        height: '100%',
-        flex: 6,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
+  screen: {
+    width: '100%',
+    height: '100%',
+    flex: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 ```
+
 </details>
 
 ## Props
@@ -245,7 +328,7 @@ MIT
 
 ## Requirement's
 
-| Name | Version |
-| ---- | ---- |
-| [@react-navigation/native](https://reactnavigation.org/docs/getting-started/) | >=5.0.0 |
+| Name                                                                                    | Version |
+| --------------------------------------------------------------------------------------- | ------- |
+| [@react-navigation/native](https://reactnavigation.org/docs/getting-started/)           | >=5.0.0 |
 | [@react-navigation/bottom-tabs](https://reactnavigation.org/docs/tab-based-navigation/) | >=5.0.0 |
