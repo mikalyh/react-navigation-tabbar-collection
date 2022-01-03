@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Easing,
   SafeAreaView,
+  LayoutChangeEvent,
 } from 'react-native';
 import { main_colors } from '../assets/TabColor';
 import { ColorfulStyle } from '../assets/TabStyle';
@@ -49,6 +50,8 @@ const ColorfulTabBar = ({
       >
         {state.routes.map((route, index) => {
           const focusAnimation = useRef(new Animated.Value(0)).current;
+          const [width_text, setWidthText] = useState(0)
+          const [width_icon, setWidthIcon] = useState(0)
 
           const { options } = descriptors[route.key];
           const label =
@@ -166,9 +169,17 @@ const ColorfulTabBar = ({
               })`,
             ],
           });
-          const marginLeftText = focusAnimation.interpolate({
+
+          const HALF_ICON_WIDTH = width_icon/2
+          const TEXT_ICON_WIDTH = width_text+HALF_ICON_WIDTH
+
+          const translateXIcon = focusAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [-50, 7],
+            outputRange: [0, -(TEXT_ICON_WIDTH)/2],
+          });
+          const translateXText = focusAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, (HALF_ICON_WIDTH)+5],
           });
           const opacityText = focusAnimation.interpolate({
             inputRange: [0.3, 1],
@@ -202,22 +213,40 @@ const ColorfulTabBar = ({
                     },
                   ]}
                 >
-                  <View>{renderIcon(isFocused)}</View>
+                  <Animated.View style={{
+                      position: 'absolute',
+                      transform: [
+                        {translateX: translateXIcon}
+                      ]
+                  }}
+                  onLayout={(e: LayoutChangeEvent) => {
+                    const {width} = e.nativeEvent.layout
+                    setWidthIcon(width)
+                  }}>
+                    {renderIcon(isFocused)}
+                  </Animated.View>
 
                   <Animated.View
                     style={{
-                      marginLeft: marginLeftText,
+                      position: 'absolute',
                       opacity: opacityText,
+                      transform: [
+                        {translateX: translateXText}
+                      ],
+                    }}
+                    onLayout={(e: LayoutChangeEvent) => {
+                      const {width} = e.nativeEvent.layout
+                      setWidthText(width)
                     }}
                   >
                     <Text
                       numberOfLines={1}
                       style={[
                         ColorfulStyle.itemText,
-                        labelStyle,
                         {
                           color: darkMode ? FOREGROUND_COLOR : color,
                         },
+                        labelStyle,
                       ]}
                     >
                       {label}
