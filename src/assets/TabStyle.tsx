@@ -36,6 +36,7 @@ export const ColorfulStyle = StyleSheet.create({
   },
   itemText: {
     fontWeight: 'bold',
+    maxWidth: 90
   },
 });
 
