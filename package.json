@@ -1,6 +1,6 @@
 {
   "name": "react-navigation-tabbar-collection",
-  "version": "0.1.2-beta",
+  "version": "0.1.3-beta",
   "description": "Collection of Animated 60 FPS TabBar Component's based on React Navigation.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
