@@ -40,14 +40,7 @@ yarn add react-navigation-tabbar-collection
 <img alt="ColorfulTabBar Dark Mode" height="150" src="https://raw.githubusercontent.com/mikalyh/react-navigation-tabbar-collection/master/preview/colorful_dark.gif" />
 
 ```js
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-//Import the TabBar
 import { ColorfulTabBar } from 'react-navigation-tabbar-collection';
-
-const Tab = createBottomTabNavigator();
 
 const App = () => {
     return (
@@ -173,10 +166,22 @@ const styles = StyleSheet.create({
 
 ```js
 import { CleanTabBar } from 'react-navigation-tabbar-collection';
+
+const App = () => {
+    return (
+        <NavigationContainer>
+            <Tab.Navigator
+                tabBar={(props) => <CleanTabBar {...props} />} //<- Add Here
+            >
+                {/* Your Screens Here ~ */}
+            </Tab.Navigator>
+        </NavigatorContainer>
+    )
+}
 ```
 
 <details>
-<summary>Clean TabBar Usage Example</summary>
+<summary>Example</summary>
 
 ```js
 import React from 'react';
