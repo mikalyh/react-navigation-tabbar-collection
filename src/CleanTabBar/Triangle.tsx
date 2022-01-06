@@ -3,7 +3,7 @@ import { Animated, View } from 'react-native';
 import { CleanStyle } from '../assets/TabStyle';
 import type { TriangleConfig } from './types';
 
-const Triangle = ({ color, style, translateY = 0 }: TriangleConfig) => {
+const Triangle = ({ color, style, translateY }: TriangleConfig) => {
   return (
     <Animated.View
       style={[
