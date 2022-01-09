@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'
-import { CleanTabBar } from 'react-navigation-tabbar-collection';
+import { ColorfulTabBar as TabBar } from 'react-navigation-tabbar-collection';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +19,7 @@ const App = () => {
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={{ headerShown: false }}
-        tabBar={(props) => <CleanTabBar {...props} />}
+        tabBar={(props) => <TabBar {...props} />}
       >
         <Tab.Screen
           name="Home"

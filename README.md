@@ -46,7 +46,7 @@ const App = () => {
     return (
         <NavigationContainer>
             <Tab.Navigator
-                tabBar={(props) => <ColorfulTabBar {...props} />} //<- Add Here
+                tabBar={(props) => <ColorfulTabBar {...props} />} //Add Here
             >
                 {/* Your Screens Here ~ */}
             </Tab.Navigator>
@@ -171,7 +171,7 @@ const App = () => {
     return (
         <NavigationContainer>
             <Tab.Navigator
-                tabBar={(props) => <CleanTabBar {...props} />} //<- Add Here
+                tabBar={(props) => <CleanTabBar {...props} />} //Add Here
             >
                 {/* Your Screens Here ~ */}
             </Tab.Navigator>
