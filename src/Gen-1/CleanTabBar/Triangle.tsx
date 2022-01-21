@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animated, View } from 'react-native';
-import { CleanStyle } from '../assets/TabStyle';
+import { CleanStyle } from '../../assets/TabStyle';
 import type { TriangleConfig } from './types';
 
 const Triangle = ({ color, style, translateY }: TriangleConfig) => {

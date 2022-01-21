@@ -7,8 +7,8 @@ import {
   Easing,
   SafeAreaView,
 } from 'react-native';
-import { main_colors } from '../assets/TabColor';
-import { CleanStyle } from '../assets/TabStyle';
+import { main_colors } from '../../assets/TabColor';
+import { CleanStyle } from '../../assets/TabStyle';
 import Dot from './Dot';
 import Triangle from './Triangle';
 import type { CleanTabBarConfig } from './types';
