@@ -111,18 +111,18 @@ const ToolsTabBar = ({
           const onFocusedAnimation = () => {
             Animated.timing(focusAnimation, {
               toValue: 1,
-              duration: 700,
+              duration: 500,
               useNativeDriver: true,
-              easing: Easing.bezier(0.33, 1, 0.68, 1),
+              easing: Easing.bezier(0.16, 1, 0.3, 1),
             }).start();
           };
 
           const notFocusedAnimation = () => {
             Animated.timing(focusAnimation, {
               toValue: 0,
-              duration: 700,
+              duration: 500,
               useNativeDriver: true,
-              easing: Easing.bezier(0.33, 1, 0.68, 1),
+              easing: Easing.bezier(0.16, 1, 0.3, 1),
             }).start();
           };
 

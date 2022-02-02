@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'
-import { ColorfulTabBar as TabBar } from 'react-navigation-tabbar-collection';
+import { ToolsTabBar as TabBar } from 'react-navigation-tabbar-collection';
 
 const Tab = createBottomTabNavigator();
 
@@ -57,7 +57,7 @@ const App = () => {
             color: 'danger',
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Settings"
           component={DemoScreen}
           options={{
@@ -65,7 +65,7 @@ const App = () => {
             icon: ({focused, color, size}) => <Icon name="setting" size={size} color={color} />,
             color: 'success',
           }}
-        />
+        /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );
