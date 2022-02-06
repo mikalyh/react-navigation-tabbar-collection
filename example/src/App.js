@@ -19,7 +19,17 @@ const App = () => {
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={{ headerShown: false }}
-        tabBar={(props) => <TabBar {...props} />}
+        tabBar={(props) => 
+          <TabBar {...props}
+            closeIcon={({color, size}) => <Icon name="close" size={size} color={color} />}
+            openIcon={({color, size}) => <Icon name="plus" size={size} color={color} />}
+            toolsData={[
+              {
+                icon: ({color, size}) => <Icon name="plus" size={size} color={color} />,
+                onPress: () => null
+              }
+            ]}
+          />}
       >
         <Tab.Screen
           name="Home"

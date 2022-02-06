@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Animated,
@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { main_colors } from '../../assets/TabColor';
 import { ToolsStyle } from '../../assets/TabStyle';
+import ToolsButton from './ToolsButton';
 import type { ToolsTabBarConfig } from './types';
 
 const ToolsTabBar = ({
@@ -18,9 +19,55 @@ const ToolsTabBar = ({
   height,
   darkMode = false,
   colorPalette = main_colors,
+  closeIcon,
+  openIcon,
+  toolsData
 }: ToolsTabBarConfig) => {
   const BACKGROUND_COLOR = darkMode ? colorPalette.dark : colorPalette.light;
   const FOREGROUND_COLOR = darkMode ? colorPalette.light : colorPalette.dark;
+
+  const [tools_view, setToolsView] = useState(false);
+
+  const renderToolsIcon = (type: 'close' | 'open') => {
+    switch (type) {
+      case 'close':
+        if (closeIcon === undefined || closeIcon === null) {
+          return (
+            <View
+              style={{
+                ...ToolsStyle.itemIconNotFound,
+                borderColor: main_colors.light,
+              }}
+            />
+          );
+        }
+    
+        return closeIcon({
+          color: main_colors.light,
+          size: 23,
+        });    
+
+      case 'open':
+        if (openIcon === undefined || openIcon === null) {
+          return (
+            <View
+              style={{
+                ...ToolsStyle.itemIconNotFound,
+                borderColor: main_colors.light,
+              }}
+            />
+          );
+        }
+    
+        return openIcon({
+          color: main_colors.light,
+          size: 23,
+        });        
+
+      default:
+        return undefined
+    }
+  };
 
   return (
     <SafeAreaView
@@ -159,6 +206,10 @@ const ToolsTabBar = ({
           );
         })}
       </View>
+      <ToolsButton
+        color={main_colors.danger}
+        renderIcon={renderToolsIcon}
+      />
     </SafeAreaView>
   );
 };

@@ -123,7 +123,6 @@ export const ToolsStyle = StyleSheet.create({
   container: {
     flexDirection: 'column',
     alignItems: 'center',
-    overflow: 'hidden',
   },
   content: {
     minHeight: 55,
@@ -150,11 +149,6 @@ export const ToolsStyle = StyleSheet.create({
     width: 23,
     height: 23,
   },
-  filterIcon: {
-    zIndex: 2,
-    position: 'absolute',
-    width: '100%'
-  },
   itemTextLayer: {
     zIndex: 3,
     position: 'absolute',
@@ -163,10 +157,18 @@ export const ToolsStyle = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
   },
-  filterText: {
-    zIndex: 4,
+  toolsButtonContainer: {
+    zIndex: 10,
     position: 'absolute',
-    bottom: -5,
-    width: '100%',
+    top: -38,
+    padding: 9,
+    borderRadius: 30
   },
+  toolsButton: {
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50
+  }
 });
