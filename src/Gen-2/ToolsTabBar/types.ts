@@ -6,13 +6,14 @@ import type {
 import type { BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs/src/types';
 import type { BottomTabDescriptorMap } from '../../types';
 import type { ColorPaletteConfig } from '../../assets/types';
+import type { Animated } from 'react-native';
 
 type ToolsDataType = {
   icon?: (props: {
     color: string;
     size: number;
   }) => React.ReactNode;
-  onPress?: () => void
+  onPress?: () => void;
 }
 
 export type ToolsTabBarConfig = {
@@ -35,6 +36,9 @@ export type ToolsTabBarConfig = {
 };
 
 export type ToolsButtonConfig = {
-  color: string,
+  color: string;
   renderIcon: (type: 'close' | 'open') => React.ReactNode;
+  translateY: number | Animated.AnimatedInterpolation;
+  rotate?: number; 
+  onPress?: () => void;
 }

@@ -122,7 +122,6 @@ export const CleanStyle = StyleSheet.create({
 export const ToolsStyle = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    alignItems: 'center',
   },
   content: {
     minHeight: 55,
@@ -157,10 +156,18 @@ export const ToolsStyle = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
   },
-  toolsButtonContainer: {
-    zIndex: 10,
+  toolsContainer: {
     position: 'absolute',
-    top: -38,
+    bottom: 0,
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+  },
+  toolsButtonContainer: {
+    zIndex: 2,
+    position: 'absolute',
+    bottom: 25,
     padding: 9,
     borderRadius: 30
   },
