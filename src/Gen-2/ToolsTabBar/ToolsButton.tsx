@@ -3,7 +3,7 @@ import React from 'react';
 import { ToolsStyle } from '../../assets/TabStyle';
 import type { ToolsButtonConfig } from './types';
 
-const ToolsButton = ({renderIcon, color, translateY, rotate, onPress}: ToolsButtonConfig) => {
+const ToolsButton = ({renderIcon, renderIconType = 'open', color, translateY, rotate, onPress}: ToolsButtonConfig) => {
   return (
     <Animated.View style={[
         ToolsStyle.toolsButtonContainer,
@@ -11,6 +11,7 @@ const ToolsButton = ({renderIcon, color, translateY, rotate, onPress}: ToolsButt
             transform: [
                 {
                     translateY: translateY,
+                    rotate: rotate
                 }
             ]
         }
@@ -22,7 +23,7 @@ const ToolsButton = ({renderIcon, color, translateY, rotate, onPress}: ToolsButt
                     backgroundColor: color,
                 }
             ]}>
-            {renderIcon('open')}
+            {renderIcon(renderIconType)}
             </View>
         </TouchableOpacity>
     </Animated.View>

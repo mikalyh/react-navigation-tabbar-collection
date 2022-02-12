@@ -38,7 +38,8 @@ export type ToolsTabBarConfig = {
 export type ToolsButtonConfig = {
   color: string;
   renderIcon: (type: 'close' | 'open') => React.ReactNode;
+  renderIconType: 'close' | 'open';
   translateY: number | Animated.AnimatedInterpolation;
-  rotate?: number; 
+  rotate: number | Animated.AnimatedInterpolation; 
   onPress?: () => void;
 }

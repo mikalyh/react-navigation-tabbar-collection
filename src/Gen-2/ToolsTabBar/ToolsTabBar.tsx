@@ -107,6 +107,10 @@ const ToolsTabBar = ({
     inputRange: [0, 1],
     outputRange: [0, 27]
   })
+  const rotateTools = toolsAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg']
+  })
 
   const translateYContainer = toolsAnimation.interpolate({
     inputRange: [0, 1],
@@ -114,21 +118,23 @@ const ToolsTabBar = ({
   })
 
   return (
-    <>
-      <SafeAreaView style={ToolsStyle.toolsContainer}>
+    <SafeAreaView>
+      <View style={ToolsStyle.toolsContainer}>
         <ToolsButton
           color={main_colors.danger}
           renderIcon={renderToolsIcon}
+          renderIconType={!isToolsShow ? 'open' : 'close'}
           translateY={translateYTools}
+          rotate={rotateTools}
           onPress={onToolsPress}
         />
-      </SafeAreaView>
+      </View>
       
-      <SafeAreaView
+      <View
         style={[
           ToolsStyle.container,
           {
-            backgroundColor: BACKGROUND_COLOR,
+            backgroundColor: 'transparent',
             height: height,
           },
         ]}
@@ -271,8 +277,8 @@ const ToolsTabBar = ({
             );
           })}
         </Animated.View>
-      </SafeAreaView>
-    </>
+      </View>
+    </SafeAreaView>
   );
 };
 
