@@ -22,47 +22,43 @@ const ToolsTabBar = ({
   colorPalette = main_colors,
   closeIcon,
   openIcon,
-  toolsData
+  toolsData = []
 }: ToolsTabBarConfig) => {
   const BACKGROUND_COLOR = darkMode ? colorPalette.dark : colorPalette.light;
   const FOREGROUND_COLOR = darkMode ? colorPalette.light : colorPalette.dark;
   const WIDTH_CONTENT = Dimensions.get('window').width;
+
   const ITEM_TOTAL = state.routes.length;
+  const TOOLS_BUTTON_SIZE = 50;
+  const FIRST_ITEM_TOTAL = Math.ceil(ITEM_TOTAL/2);
+  const SECOND_ITEM_TOTAL = ITEM_TOTAL - FIRST_ITEM_TOTAL;
+
+  const TOOLS_ITEM_TOTAL = toolsData.length;
+  const FIRST_TOOLS_ITEM_TOTAL = Math.ceil(TOOLS_ITEM_TOTAL/2);
+  const SECOND_TOOLS_ITEM_TOTAL = TOOLS_ITEM_TOTAL - FIRST_ITEM_TOTAL;
 
   const [isToolsShow, setToolsShow] = useState(false);
   const toolsAnimation = useRef(new Animated.Value(0)).current;
 
   const renderToolsIcon = (type: 'close' | 'open') => {
+    if ((closeIcon === undefined || closeIcon === null) || (openIcon === undefined || openIcon === null)) {
+      return (
+        <View
+          style={{
+            ...ToolsStyle.itemIconNotFound,
+            borderColor: main_colors.light,
+          }}
+        />
+      );
+    }
     switch (type) {
       case 'close':
-        if (closeIcon === undefined || closeIcon === null) {
-          return (
-            <View
-              style={{
-                ...ToolsStyle.itemIconNotFound,
-                borderColor: main_colors.light,
-              }}
-            />
-          );
-        }
-    
         return closeIcon({
           color: main_colors.light,
           size: 23,
         });    
 
       case 'open':
-        if (openIcon === undefined || openIcon === null) {
-          return (
-            <View
-              style={{
-                ...ToolsStyle.itemIconNotFound,
-                borderColor: main_colors.light,
-              }}
-            />
-          );
-        }
-    
         return openIcon({
           color: main_colors.light,
           size: 23,
@@ -128,13 +124,54 @@ const ToolsTabBar = ({
           rotate={rotateTools}
           onPress={onToolsPress}
         />
+
+        <View
+          style={ToolsStyle.toolsContent}
+        >
+          {toolsData.map((tool, index) => {
+            const renderIcon = () => {
+              const {icon} = tool
+              if (icon === undefined || icon === null) {
+                return (
+                  <View
+                    style={{
+                      ...ToolsStyle.itemIconNotFound,
+                      borderColor: FOREGROUND_COLOR,
+                    }}
+                  />
+                );
+              }
+
+              return icon({
+                color: FOREGROUND_COLOR,
+                size: 23,
+              });
+            };
+
+            return (
+              <Animated.View key={index} style={[
+                ToolsStyle.toolsItem,
+                {
+                  width: 50,
+                  backgroundColor: 'red'
+                  // maxWidth: index < FIRST_TOOLS_ITEM_TOTAL ?
+                  //                     (WIDTH_CONTENT/2 - (TOOLS_BUTTON_SIZE+0.5)/2) / FIRST_TOOLS_ITEM_TOTAL
+                  //                   : (WIDTH_CONTENT/2 - (TOOLS_BUTTON_SIZE)/2) / SECOND_TOOLS_ITEM_TOTAL,
+                  // marginLeft: index === FIRST_TOOLS_ITEM_TOTAL ? TOOLS_BUTTON_SIZE+0.2 : 0,
+                }
+              ]}>
+                {renderIcon()}
+              </Animated.View>
+            );
+          })}
+        </View>
       </View>
+
       
       <View
         style={[
           ToolsStyle.container,
           {
-            backgroundColor: 'transparent',
             height: height,
           },
         ]}
@@ -244,11 +281,13 @@ const ToolsTabBar = ({
             });
 
             return (
-              <Animated.View key={index} style={[
+              <View key={index} style={[
                 ToolsStyle.item,
                 {
-                  maxWidth: (WIDTH_CONTENT - 50) / ITEM_TOTAL,
-                  marginLeft: index === 2 ? 50 : 0
+                  maxWidth: index < FIRST_ITEM_TOTAL ?
+                                      (WIDTH_CONTENT/2 - (TOOLS_BUTTON_SIZE+0.5)/2) / FIRST_ITEM_TOTAL
+                                    : (WIDTH_CONTENT/2 - (TOOLS_BUTTON_SIZE)/2) / SECOND_ITEM_TOTAL,
+                  marginLeft: index === FIRST_ITEM_TOTAL ? TOOLS_BUTTON_SIZE+0.2 : 0,
                 }
               ]}>
                 <TouchableOpacity
@@ -273,7 +312,7 @@ const ToolsTabBar = ({
                     {renderIcon(isFocused)}
                   </Animated.View>
                 </TouchableOpacity>
-              </Animated.View>
+              </View>
             );
           })}
         </Animated.View>

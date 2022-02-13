@@ -177,5 +177,10 @@ export const ToolsStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 50
+  },
+  toolsContent: {
+    flexDirection: 'row',
+  },
+  toolsItem: {
   }
 });

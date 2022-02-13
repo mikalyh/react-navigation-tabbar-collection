@@ -9,10 +9,8 @@ const ToolsButton = ({renderIcon, renderIconType = 'open', color, translateY, ro
         ToolsStyle.toolsButtonContainer,
         {
             transform: [
-                {
-                    translateY: translateY,
-                    rotate: rotate
-                }
+                { translateY: translateY },
+                { rotate: rotate}
             ]
         }
     ]}>

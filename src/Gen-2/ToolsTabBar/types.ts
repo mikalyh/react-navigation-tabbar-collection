@@ -39,7 +39,7 @@ export type ToolsButtonConfig = {
   color: string;
   renderIcon: (type: 'close' | 'open') => React.ReactNode;
   renderIconType: 'close' | 'open';
-  translateY: number | Animated.AnimatedInterpolation;
-  rotate: number | Animated.AnimatedInterpolation; 
+  translateY: Animated.AnimatedInterpolation;
+  rotate: Animated.AnimatedInterpolation; 
   onPress?: () => void;
 }

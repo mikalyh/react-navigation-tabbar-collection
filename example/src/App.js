@@ -27,6 +27,10 @@ const App = () => {
               {
                 icon: ({color, size}) => <Icon name="plus" size={size} color={color} />,
                 onPress: () => null
+              },
+              {
+                icon: ({color, size}) => <Icon name="home" size={size} color={color} />,
+                onPress: () => null
               }
             ]}
           />}
