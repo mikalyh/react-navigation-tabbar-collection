@@ -182,5 +182,9 @@ export const ToolsStyle = StyleSheet.create({
     flexDirection: 'row',
   },
   toolsItem: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    width: 50
   }
 });

@@ -153,14 +153,22 @@ const ToolsTabBar = ({
                 ToolsStyle.toolsItem,
                 {
                   width: 50,
-                  backgroundColor: 'red'
+                  backgroundColor: BACKGROUND_COLOR,
+                  borderRadius: 50,
+                  marginLeft: 20,
+                  marginRight: 20,
+                  transform: [
+                    {translateY: -50},
+                  ]
                   // maxWidth: index < FIRST_TOOLS_ITEM_TOTAL ?
                   //                     (WIDTH_CONTENT/2 - (TOOLS_BUTTON_SIZE+0.5)/2) / FIRST_TOOLS_ITEM_TOTAL
                   //                   : (WIDTH_CONTENT/2 - (TOOLS_BUTTON_SIZE)/2) / SECOND_TOOLS_ITEM_TOTAL,
                   // marginLeft: index === FIRST_TOOLS_ITEM_TOTAL ? TOOLS_BUTTON_SIZE+0.2 : 0,
                 }
               ]}>
-                {renderIcon()}
+                <TouchableOpacity >
+                  {renderIcon()}
+                </TouchableOpacity>
               </Animated.View>
             );
           })}
