@@ -121,14 +121,18 @@ export const CleanStyle = StyleSheet.create({
 
 export const FloatingStyle = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
   content: {
-    minHeight: 55,
+    flex: 5,
+    minHeight: 62,
     flexDirection: 'row',
-    marginBottom: 2,
+    margin: 15,
+    padding: 3,
+    borderRadius: 50
   },
   item: {
     flex: 1,
@@ -154,4 +158,12 @@ export const FloatingStyle = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 11
   },
+  toggleItem: {
+    flex: 1,
+    borderTopEndRadius: 50,
+    borderBottomEndRadius: 50
+  },
+  toggleIconLayer: {
+    marginBottom: 3
+  }
 });

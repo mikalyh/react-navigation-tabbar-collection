@@ -1,3 +1,4 @@
+import { CleanStyle } from 'lib/typescript/assets/TabStyle';
 import React, { useEffect, useRef } from 'react';
 import {
   View,
@@ -28,7 +29,6 @@ const FloatingTabBar = ({
       style={[
         FloatingStyle.container,
         {
-          backgroundColor: BACKGROUND_COLOR,
           height: height,
         },
       ]}
@@ -37,6 +37,7 @@ const FloatingTabBar = ({
         style={[
           FloatingStyle.content,
           {
+            backgroundColor: BACKGROUND_COLOR,
             maxWidth: maxWidth,
           },
         ]}
@@ -145,6 +146,10 @@ const FloatingTabBar = ({
             inputRange: [0, 1],
             outputRange: [5, -2],
           });
+          const translateYText = focusAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1],
+          });
           const scaleText = focusAnimation.interpolate({
             inputRange: [0, 1],
             outputRange: [0, 1],
@@ -179,6 +184,7 @@ const FloatingTabBar = ({
                     FloatingStyle.itemTextLayer,
                     {
                       transform: [
+                        { translateY: translateYText },
                         { scale: scaleText },
                       ],
                     },
@@ -201,6 +207,27 @@ const FloatingTabBar = ({
             </Animated.View>
           );
         })}
+        <View style={[
+          FloatingStyle.toggleItem,
+          {
+            backgroundColor: '#00000044'
+          }
+        ]}>
+          <TouchableOpacity
+            accessibilityRole="button"
+            // onPress={onPress}
+            style={FloatingStyle.touchableItem}
+          >
+            <View style={FloatingStyle.toggleIconLayer}>
+              <View
+                style={{
+                  ...FloatingStyle.itemIconNotFound,
+                  borderColor: FOREGROUND_COLOR,
+                }}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
