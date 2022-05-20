@@ -118,3 +118,40 @@ export const CleanStyle = StyleSheet.create({
     bottom: 5,
   },
 });
+
+export const FloatingStyle = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
+  content: {
+    minHeight: 55,
+    flexDirection: 'row',
+    marginBottom: 2,
+  },
+  item: {
+    flex: 1,
+    flexDirection: 'row',
+    overflow: 'hidden',
+  },
+  touchableItem: {
+    flex: 1,
+    padding: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  itemIconLayer: {
+  },
+  itemIconNotFound: {
+    borderWidth: 2,
+    width: 23,
+    height: 23,
+  },
+  itemTextLayer: {
+  },
+  itemText: {
+    fontWeight: 'bold',
+    fontSize: 11
+  },
+});

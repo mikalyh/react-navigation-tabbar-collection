@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -6,30 +6,27 @@ import {
   TouchableOpacity,
   Easing,
   SafeAreaView,
-  LayoutChangeEvent,
 } from 'react-native';
 import { main_colors } from '../../assets/TabColor';
-import { ColorfulStyle } from '../../assets/TabStyle';
-import { hexToRGB } from '../../utils/Converter';
+import { FloatingStyle } from '../../assets/TabStyle';
 import type { FloatingTabBarConfig } from './types';
 
 const FloatingTabBar = ({
   state,
   descriptors,
   navigation,
-  maxWidth,
+  maxWidth = 600,
   height,
   darkMode = false,
   colorPalette = main_colors,
 }: FloatingTabBarConfig) => {
   const BACKGROUND_COLOR = darkMode ? colorPalette.dark : colorPalette.light;
   const FOREGROUND_COLOR = darkMode ? colorPalette.light : colorPalette.dark;
-  const ITEM_TOTAL = state.routes.length;
 
   return (
     <SafeAreaView
       style={[
-        ColorfulStyle.container,
+        FloatingStyle.container,
         {
           backgroundColor: BACKGROUND_COLOR,
           height: height,
@@ -38,20 +35,14 @@ const FloatingTabBar = ({
     >
       <View
         style={[
-          ColorfulStyle.content,
+          FloatingStyle.content,
           {
-            maxWidth: maxWidth
-              ? maxWidth
-              : ITEM_TOTAL == 1
-              ? 150
-              : 100 * ITEM_TOTAL,
+            maxWidth: maxWidth,
           },
         ]}
       >
         {state.routes.map((route, index) => {
           const focusAnimation = useRef(new Animated.Value(0)).current;
-          const [width_text, setWidthText] = useState(0)
-          const [width_icon, setWidthIcon] = useState(0)
 
           const { options } = descriptors[route.key];
           const label =
@@ -75,9 +66,7 @@ const FloatingTabBar = ({
               : options.color !== undefined
               ? options.color
               : colorPalette.primary;
-
           color = (color || '').charAt(0) == '#' ? color : colorPalette[color];
-          const rgb_color = hexToRGB(color);
 
           const icon =
             options.tabBarIcon !== undefined
@@ -91,7 +80,7 @@ const FloatingTabBar = ({
               return (
                 <View
                   style={{
-                    ...ColorfulStyle.itemIconNotFound,
+                    ...FloatingStyle.itemIconNotFound,
                     borderColor: focused ? color : FOREGROUND_COLOR,
                   }}
                 />
@@ -100,11 +89,7 @@ const FloatingTabBar = ({
 
             return icon({
               focused,
-              color: focused
-                ? darkMode
-                  ? FOREGROUND_COLOR
-                  : color
-                : FOREGROUND_COLOR,
+              color: focused ? color : FOREGROUND_COLOR,
               size: 23,
             });
           };
@@ -142,7 +127,7 @@ const FloatingTabBar = ({
             Animated.timing(focusAnimation, {
               toValue: 1,
               duration: 500,
-              useNativeDriver: false,
+              useNativeDriver: true,
               easing: Easing.bezier(0.33, 1, 0.68, 1),
             }).start();
           };
@@ -151,51 +136,22 @@ const FloatingTabBar = ({
             Animated.timing(focusAnimation, {
               toValue: 0,
               duration: 500,
-              useNativeDriver: false,
+              useNativeDriver: true,
               easing: Easing.bezier(0.33, 1, 0.68, 1),
             }).start();
           };
 
-          const flexItem = focusAnimation.interpolate({
+          const translateYIcon = focusAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [1, 2],
+            outputRange: [5, -2],
           });
-          const filterColor = focusAnimation.interpolate({
+          const scaleText = focusAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [
-              `rgba(${rgb_color[0]}, ${rgb_color[1]}, ${rgb_color[2]}, 0)`,
-              `rgba(${rgb_color[0]}, ${rgb_color[1]}, ${rgb_color[2]}, ${
-                darkMode ? '1' : '.2'
-              })`,
-            ],
-          });
-
-          const HALF_ICON_WIDTH = width_icon/2
-          const TEXT_ICON_WIDTH = width_text+HALF_ICON_WIDTH
-
-          const translateXIcon = focusAnimation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, -(TEXT_ICON_WIDTH)/2],
-          });
-          const translateXText = focusAnimation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, (HALF_ICON_WIDTH)+5],
-          });
-          const opacityText = focusAnimation.interpolate({
-            inputRange: [0.3, 1],
             outputRange: [0, 1],
           });
 
           return (
-            <Animated.View
-              key={index}
-              style={[
-                ColorfulStyle.item,
-                {
-                  flex: flexItem,
-                },
-              ]}
-            >
+            <Animated.View key={index} style={FloatingStyle.item}>
               <TouchableOpacity
                 accessibilityRole="button"
                 accessibilityState={isFocused ? { selected: true } : {}}
@@ -203,55 +159,43 @@ const FloatingTabBar = ({
                 testID={options.tabBarTestID}
                 onPress={onPress}
                 onLongPress={onLongPress}
-                style={ColorfulStyle.touchableItem}
+                style={FloatingStyle.touchableItem}
               >
                 <Animated.View
                   style={[
-                    ColorfulStyle.filterColor,
+                    FloatingStyle.itemIconLayer,
                     {
-                      backgroundColor: filterColor,
+                      transform: [
+                        { translateY: translateYIcon },
+                      ],
                     },
                   ]}
                 >
-                  <Animated.View style={{
-                      position: 'absolute',
+                  {renderIcon(isFocused)}
+                </Animated.View>
+                <Animated.View
+                  pointerEvents="none"
+                  style={[
+                    FloatingStyle.itemTextLayer,
+                    {
                       transform: [
-                        {translateX: translateXIcon}
-                      ]
-                  }}
-                  onLayout={(e: LayoutChangeEvent) => {
-                    const {width} = e.nativeEvent.layout
-                    setWidthIcon(width)
-                  }}>
-                    {renderIcon(isFocused)}
-                  </Animated.View>
-
-                  <Animated.View
-                    style={{
-                      position: 'absolute',
-                      opacity: opacityText,
-                      transform: [
-                        {translateX: translateXText}
+                        { scale: scaleText },
                       ],
-                    }}
-                    onLayout={(e: LayoutChangeEvent) => {
-                      const {width} = e.nativeEvent.layout
-                      setWidthText(width)
-                    }}
+                    },
+                  ]}
+                >
+                  <Text
+                    numberOfLines={1}
+                    style={[
+                      FloatingStyle.itemText,
+                      labelStyle,
+                      {
+                        color: isFocused ? color : FOREGROUND_COLOR,
+                      },
+                    ]}
                   >
-                    <Text
-                      numberOfLines={1}
-                      style={[
-                        ColorfulStyle.itemText,
-                        {
-                          color: darkMode ? FOREGROUND_COLOR : color,
-                        },
-                        labelStyle,
-                      ]}
-                    >
-                      {label}
-                    </Text>
-                  </Animated.View>
+                    {label}
+                  </Text>
                 </Animated.View>
               </TouchableOpacity>
             </Animated.View>
