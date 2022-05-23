@@ -29,7 +29,7 @@ const FloatingTabBar = ({
   const toggleAnimation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    onToggleAnimation(isShowContent ? 0 : 1)
+    onToggleAnimation(isShowContent ? 1 : 0)
   }, [isShowContent])
 
   const onToggle = () => {
@@ -40,7 +40,7 @@ const FloatingTabBar = ({
     Animated.timing(toggleAnimation, {
       toValue: value,
       duration: 500,
-      useNativeDriver: true,
+      useNativeDriver: false,
       easing: Easing.bezier(0.33, 1, 0.68, 1),
     }).start();
   }
@@ -63,6 +63,11 @@ const FloatingTabBar = ({
     });
   };
 
+  const scaleXToggle = toggleAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [.5, 1],
+  });
+
   return (
     <SafeAreaView
       style={[
@@ -72,12 +77,18 @@ const FloatingTabBar = ({
         },
       ]}
     >
-      <View
+      <Animated.View
         style={[
           FloatingStyle.content,
           {
             backgroundColor: BACKGROUND_COLOR,
             maxWidth: maxWidth,
+            bottom: 0,
+            right: 0,
+            transform: [
+              {scaleX: scaleXToggle},
+              {translateX: 0}
+            ]
           },
         ]}
       >
@@ -195,7 +206,9 @@ const FloatingTabBar = ({
           });
 
           return (
-            <Animated.View key={index} style={FloatingStyle.item}>
+            <Animated.View key={index} style={[FloatingStyle.item, {
+              display: isShowContent ? 'flex' : 'none'
+            }]}>
               <TouchableOpacity
                 accessibilityRole="button"
                 accessibilityState={isFocused ? { selected: true } : {}}
@@ -249,7 +262,9 @@ const FloatingTabBar = ({
         <View style={[
           FloatingStyle.toggleItem,
           {
-            backgroundColor: '#00000012'
+            backgroundColor: '#00000012',
+            borderTopStartRadius: isShowContent ? 0 : 50 ,
+            borderBottomStartRadius: isShowContent ? 0 : 50 ,
           }
         ]}>
           <TouchableOpacity
@@ -258,11 +273,11 @@ const FloatingTabBar = ({
             style={FloatingStyle.touchableItem}
           >
             <View style={FloatingStyle.toggleIconLayer}>
-              {isShowContent ? renderToggleIcon(openIcon) : renderToggleIcon(closeIcon)}
+              {isShowContent ? renderToggleIcon(closeIcon) : renderToggleIcon(openIcon)}
             </View>
           </TouchableOpacity>
         </View>
-      </View>
+      </Animated.View>
     </SafeAreaView>
   );
 };

@@ -127,11 +127,13 @@ export const FloatingStyle = StyleSheet.create({
     right: 0,
   },
   content: {
+    position: 'absolute',
     flex: 5,
     minHeight: 62,
     flexDirection: 'row',
     margin: 15,
     padding: 3,
+    overflow: 'hidden',
     borderRadius: 50
   },
   item: {
