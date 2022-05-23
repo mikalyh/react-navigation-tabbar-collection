@@ -146,6 +146,7 @@ export const FloatingStyle = StyleSheet.create({
     alignItems: 'center',
   },
   itemIconLayer: {
+    position: 'absolute'
   },
   itemIconNotFound: {
     borderWidth: 2,
@@ -153,6 +154,7 @@ export const FloatingStyle = StyleSheet.create({
     height: 23,
   },
   itemTextLayer: {
+    position: 'absolute'
   },
   itemText: {
     fontWeight: 'bold',
@@ -164,6 +166,6 @@ export const FloatingStyle = StyleSheet.create({
     borderBottomEndRadius: 50
   },
   toggleIconLayer: {
-    marginBottom: 3
+    marginBottom: 1
   }
 });

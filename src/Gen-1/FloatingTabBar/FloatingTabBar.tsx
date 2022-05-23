@@ -1,5 +1,4 @@
-import { CleanStyle } from 'lib/typescript/assets/TabStyle';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -20,9 +19,49 @@ const FloatingTabBar = ({
   height,
   darkMode = false,
   colorPalette = main_colors,
+  closeIcon,
+  openIcon
 }: FloatingTabBarConfig) => {
   const BACKGROUND_COLOR = darkMode ? colorPalette.dark : colorPalette.light;
   const FOREGROUND_COLOR = darkMode ? colorPalette.light : colorPalette.dark;
+
+  const [isShowContent, setShowContent] = useState<boolean>(false)
+  const toggleAnimation = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    onToggleAnimation(isShowContent ? 0 : 1)
+  }, [isShowContent])
+
+  const onToggle = () => {
+    setShowContent(!isShowContent)
+  }
+
+  const onToggleAnimation = (value: number) => {
+    Animated.timing(toggleAnimation, {
+      toValue: value,
+      duration: 500,
+      useNativeDriver: true,
+      easing: Easing.bezier(0.33, 1, 0.68, 1),
+    }).start();
+  }
+
+  const renderToggleIcon = (icon?: (props: {color: string, size: number}) => React.ReactNode) => {
+    if (icon === undefined || icon === null) {
+      return (
+        <View
+          style={{
+            ...FloatingStyle.itemIconNotFound,
+            borderColor: FOREGROUND_COLOR,
+          }}
+        />
+      );
+    }
+
+    return icon({
+      color: FOREGROUND_COLOR,
+      size: 23,
+    });
+  };
 
   return (
     <SafeAreaView
@@ -144,15 +183,15 @@ const FloatingTabBar = ({
 
           const translateYIcon = focusAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [5, -2],
+            outputRange: [0, -10],
           });
           const translateYText = focusAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, 1],
+            outputRange: [0, 11],
           });
           const scaleText = focusAnimation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, 1],
+            inputRange: [0, 0.5, 1],
+            outputRange: [0, 0, 1],
           });
 
           return (
@@ -210,21 +249,16 @@ const FloatingTabBar = ({
         <View style={[
           FloatingStyle.toggleItem,
           {
-            backgroundColor: '#00000044'
+            backgroundColor: '#00000012'
           }
         ]}>
           <TouchableOpacity
             accessibilityRole="button"
-            // onPress={onPress}
+            onPress={onToggle}
             style={FloatingStyle.touchableItem}
           >
             <View style={FloatingStyle.toggleIconLayer}>
-              <View
-                style={{
-                  ...FloatingStyle.itemIconNotFound,
-                  borderColor: FOREGROUND_COLOR,
-                }}
-              />
+              {isShowContent ? renderToggleIcon(openIcon) : renderToggleIcon(closeIcon)}
             </View>
           </TouchableOpacity>
         </View>

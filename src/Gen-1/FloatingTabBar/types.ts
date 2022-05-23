@@ -17,4 +17,12 @@ export type FloatingTabBarConfig = {
   colorPalette: ColorPaletteConfig;
   initialOpen: boolean;
   toggleButton: boolean;
+  openIcon?: (props: {
+    color: string;
+    size: number;
+  }) => React.ReactNode;
+  closeIcon?: (props: {
+    color: string;
+    size: number;
+  }) => React.ReactNode;
 };
