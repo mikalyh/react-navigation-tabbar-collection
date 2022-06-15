@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Easing,
   SafeAreaView,
+  Dimensions
 } from 'react-native';
 import { main_colors } from '../../assets/TabColor';
 import { FloatingStyle } from '../../assets/TabStyle';
@@ -15,7 +16,7 @@ const FloatingTabBar = ({
   state,
   descriptors,
   navigation,
-  maxWidth = 600,
+  maxWidth = Dimensions.get('window').width - 30,
   height,
   darkMode = false,
   colorPalette = main_colors,
@@ -63,9 +64,9 @@ const FloatingTabBar = ({
     });
   };
 
-  const scaleXToggle = toggleAnimation.interpolate({
+  const widthToggle = toggleAnimation.interpolate({
     inputRange: [0, 1],
-    outputRange: [.5, 1],
+    outputRange: [75, 600],
   });
 
   return (
@@ -73,7 +74,7 @@ const FloatingTabBar = ({
       style={[
         FloatingStyle.container,
         {
-          height: height,
+          
         },
       ]}
     >
@@ -83,12 +84,10 @@ const FloatingTabBar = ({
           {
             backgroundColor: BACKGROUND_COLOR,
             maxWidth: maxWidth,
+            width: widthToggle,
+            height: height,
             bottom: 0,
             right: 0,
-            transform: [
-              {scaleX: scaleXToggle},
-              {translateX: 0}
-            ]
           },
         ]}
       >
