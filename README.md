@@ -281,7 +281,9 @@ const styles = StyleSheet.create({
 
 </details>
 
-### Floating TabBar :warning: currently in beta! :warning:
+### Floating TabBar
+
+:warning: :warning: currently in beta! :warning: :warning:
 
 ```js
 import { FloatingTabBar } from 'react-navigation-tabbar-collection';
@@ -413,13 +415,17 @@ const styles = StyleSheet.create({
 
 ## Props
 
-| Name           | Description                               | Required | Type    | Default                                                                                                       | Supported Component |
-| -------------- | ----------------------------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------- | ------------------- |
-| `{...props}`   | Default Bottom Tab React Navigation Props | YES      |         |                                                                                                               | All                 |
-| `maxWidth`     | TabBar Content Max Width                  | NO       | number  | 600                                                                                                           | All                 |
-| `height`       | TabBar Container Height                   | NO       | number  |                                                                                                               | All                 |
-| `darkMode`     | TabBar Style Mode                         | NO       | boolean | false                                                                                                         | All                 |
-| `colorPalette` | TabBar Color Palette                      | NO       | object  | [see down here](https://github.com/mikalyh/react-navigation-tabbar-collection/tree/main#default-colorpalette) | All                 |
+| Name               | Description                               | Required | Type                                                      | Default                                                                                                   | Supported Component |
+| ------------------ | ----------------------------------------- | -------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------- |
+| `{...props}`       | Default Bottom Tab React Navigation Props | YES      |                                                           |                                                                                                           | All                 |
+| `maxWidth`         | TabBar content max width                  | NO       | number                                                    | 600                                                                                                       | All                 |
+| `height`           | TabBar container height                   | NO       | number                                                    |                                                                                                           | All                 |
+| `darkMode`         | TabBar style mode                         | NO       | boolean                                                   | false                                                                                                     | All                 |
+| `colorPalette`     | TabBar color palette                      | NO       | object                                                    | [see down here](https://github.com/mikalyh/react-navigation-tabbar-collection#default-colorpalette-value) | All                 |
+| `initialOpen`      | Tabbar open/close when first load         | NO       | boolean                                                   | false                                                                                                     | Floating            |
+| `floatingPosition` | Tabbar floating button position           | NO       | `left` or `right`                                         | right                                                                                                     | Floating            |
+| `openIcon`         | Icon button open                          | NO       | ({focused: boolean, color: string, size: number}) => void |                                                                                                           | Floating            |
+| `closeIcon`        | Icon button close                         | NO       | ({focused: boolean, color: string, size: number}) => void |                                                                                                           | Floating            |
 
 ##### Default `colorPalette` value
 
