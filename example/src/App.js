@@ -19,11 +19,13 @@ const App = () => {
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={{ headerShown: false }}
-        tabBar={(props) => <TabBar
-                              {...props}
-                              openIcon={({color, size}) => <Icon name="appstore-o" size={size} color={color} />}
-                              closeIcon={({color, size}) => <Icon name="close" size={size} color={color} />}
-        />}
+        tabBar={(props) => 
+          <TabBar
+            {...props}
+            openIcon={({color, size}) => <Icon name="appstore-o" size={size} color={color} />}
+            closeIcon={({color, size}) => <Icon name="close" size={size} color={color} />}
+          />
+        }
       >
         <Tab.Screen
           name="Home"
