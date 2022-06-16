@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -6,43 +6,126 @@ import {
   TouchableOpacity,
   Easing,
   SafeAreaView,
+  Dimensions
 } from 'react-native';
-import { main_colors } from '../assets/TabColor';
-import { CleanStyle } from '../assets/TabStyle';
-import Dot from './Dot';
-import Triangle from './Triangle';
-import type { CleanTabBarConfig } from './types';
+import { main_colors } from '../../assets/TabColor';
+import { FloatingStyle } from '../../assets/TabStyle';
+import type { FloatingTabBarConfig } from './types';
 
-const CleanTabBar = ({
+const FloatingTabBar = ({
   state,
   descriptors,
   navigation,
-  maxWidth = 600,
-  height,
+  maxWidth = Dimensions.get('window').width - 30,
+  height = 62,
   darkMode = false,
   colorPalette = main_colors,
-}: CleanTabBarConfig) => {
+  closeIcon,
+  openIcon,
+  initialOpen = false,
+  floatingPosition = 'right'
+}: FloatingTabBarConfig) => {
   const BACKGROUND_COLOR = darkMode ? colorPalette.dark : colorPalette.light;
   const FOREGROUND_COLOR = darkMode ? colorPalette.light : colorPalette.dark;
 
+  const [isShowContent, setShowContent] = useState<boolean>(initialOpen)
+  const toggleAnimation = useRef(new Animated.Value(0)).current;
+  let floatingPositionStyle = {};
+
+  switch(floatingPosition) {
+    case 'left':
+      floatingPositionStyle = {
+        bottom: 0,
+        left: 0
+      }
+      break;
+    default:
+      floatingPositionStyle = {
+        bottom: 0,
+        right: 0
+      }
+  }
+
+  useEffect(() => {
+    onToggleAnimation(isShowContent ? 1 : 0)
+  }, [isShowContent])
+
+  const onToggle = () => {
+    setShowContent(!isShowContent)
+  }
+
+  const onToggleAnimation = (value: number) => {
+    Animated.timing(toggleAnimation, {
+      toValue: value,
+      duration: 500,
+      useNativeDriver: false,
+      easing: Easing.bezier(0.33, 1, 0.68, 1),
+    }).start();
+  }
+
+  const renderToggleIcon = (icon?: (props: {color: string, size: number}) => React.ReactNode) => {
+    if (icon === undefined || icon === null) {
+      return (
+        <View
+          style={{
+            ...FloatingStyle.itemIconNotFound,
+            borderColor: FOREGROUND_COLOR,
+          }}
+        />
+      );
+    }
+
+    return icon({
+      color: FOREGROUND_COLOR,
+      size: 23,
+    });
+  };
+
+  const widthToggle = toggleAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [height, 600],
+  });
+
   return (
     <SafeAreaView
-      style={[
-        CleanStyle.container,
-        {
-          backgroundColor: BACKGROUND_COLOR,
-          height: height,
-        },
-      ]}
+      style={FloatingStyle.container}
     >
-      <View
+      <Animated.View
         style={[
-          CleanStyle.content,
+          FloatingStyle.content,
           {
+            backgroundColor: BACKGROUND_COLOR,
             maxWidth: maxWidth,
+            width: widthToggle,
+            height: height,
           },
+          floatingPositionStyle
         ]}
       >
+        {
+          floatingPosition.includes('left') ? (
+            <View style={[
+              FloatingStyle.toggleItem,
+              {
+                backgroundColor: isShowContent ? colorPalette.dark+'12' : 'transparent',
+                borderTopStartRadius: 50,
+                borderBottomStartRadius: 50,
+                borderTopEndRadius: 0,
+                borderBottomEndRadius: 0
+              }
+            ]}>
+              <TouchableOpacity
+                accessibilityRole="button"
+                onPress={onToggle}
+                style={FloatingStyle.touchableItem}
+              >
+                <View style={FloatingStyle.toggleIconLayer}>
+                  {isShowContent ? renderToggleIcon(closeIcon) : renderToggleIcon(openIcon)}
+                </View>
+              </TouchableOpacity>
+            </View>
+          ) : null
+        }
         {state.routes.map((route, index) => {
           const focusAnimation = useRef(new Animated.Value(0)).current;
 
@@ -82,7 +165,7 @@ const CleanTabBar = ({
               return (
                 <View
                   style={{
-                    ...CleanStyle.itemIconNotFound,
+                    ...FloatingStyle.itemIconNotFound,
                     borderColor: focused ? color : FOREGROUND_COLOR,
                   }}
                 />
@@ -91,7 +174,7 @@ const CleanTabBar = ({
 
             return icon({
               focused,
-              color: focused ? FOREGROUND_COLOR : FOREGROUND_COLOR,
+              color: focused ? color : FOREGROUND_COLOR,
               size: 23,
             });
           };
@@ -128,7 +211,7 @@ const CleanTabBar = ({
           const onFocusedAnimation = () => {
             Animated.timing(focusAnimation, {
               toValue: 1,
-              duration: 700,
+              duration: 500,
               useNativeDriver: true,
               easing: Easing.bezier(0.33, 1, 0.68, 1),
             }).start();
@@ -137,7 +220,7 @@ const CleanTabBar = ({
           const notFocusedAnimation = () => {
             Animated.timing(focusAnimation, {
               toValue: 0,
-              duration: 700,
+              duration: 500,
               useNativeDriver: true,
               easing: Easing.bezier(0.33, 1, 0.68, 1),
             }).start();
@@ -145,31 +228,21 @@ const CleanTabBar = ({
 
           const translateYIcon = focusAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, -18],
-          });
-          const scaleIcon = focusAnimation.interpolate({
-            inputRange: [0, 0.9, 1],
-            outputRange: [1, 1, 0],
-          });
-          const translateYFilterIcon = focusAnimation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [20, -35],
+            outputRange: [0, -8],
           });
           const translateYText = focusAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [40, 0],
+            outputRange: [0, 13],
           });
           const scaleText = focusAnimation.interpolate({
-            inputRange: [0, 0.1, 1],
-            outputRange: [0, 1, 1],
-          });
-          const scaleDot = focusAnimation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, 1],
+            inputRange: [0, 0.5, 1],
+            outputRange: [0, 0, 1],
           });
 
           return (
-            <Animated.View key={index} style={CleanStyle.item}>
+            <Animated.View key={index} style={[FloatingStyle.item, {
+              display: isShowContent ? 'flex' : 'none'
+            }]}>
               <TouchableOpacity
                 accessibilityRole="button"
                 accessibilityState={isFocused ? { selected: true } : {}}
@@ -177,31 +250,24 @@ const CleanTabBar = ({
                 testID={options.tabBarTestID}
                 onPress={onPress}
                 onLongPress={onLongPress}
-                style={CleanStyle.touchableItem}
+                style={FloatingStyle.touchableItem}
               >
                 <Animated.View
                   style={[
-                    CleanStyle.itemIconLayer,
+                    FloatingStyle.itemIconLayer,
                     {
                       transform: [
                         { translateY: translateYIcon },
-                        { scale: scaleIcon },
                       ],
                     },
                   ]}
                 >
                   {renderIcon(isFocused)}
                 </Animated.View>
-                <Triangle
-                  color={BACKGROUND_COLOR}
-                  style={CleanStyle.filterIcon}
-                  translateY={translateYFilterIcon}
-                />
-
                 <Animated.View
                   pointerEvents="none"
                   style={[
-                    CleanStyle.itemTextLayer,
+                    FloatingStyle.itemTextLayer,
                     {
                       transform: [
                         { translateY: translateYText },
@@ -213,30 +279,47 @@ const CleanTabBar = ({
                   <Text
                     numberOfLines={1}
                     style={[
-                      CleanStyle.itemText,
+                      FloatingStyle.itemText,
                       labelStyle,
                       {
-                        color: color,
+                        color: isFocused ? color : FOREGROUND_COLOR,
                       },
                     ]}
                   >
                     {label}
                   </Text>
                 </Animated.View>
-                <Triangle
-                  color={BACKGROUND_COLOR}
-                  style={CleanStyle.filterText}
-                  translateY={-5}
-                />
-
-                <Dot color={color} scale={scaleDot} />
               </TouchableOpacity>
             </Animated.View>
           );
         })}
-      </View>
+        {
+          floatingPosition.includes('right') ? (
+            <View style={[
+              FloatingStyle.toggleItem,
+              {
+                backgroundColor: isShowContent ? colorPalette.dark+'12' : 'transparent',
+                borderTopStartRadius: 0,
+                borderBottomStartRadius: 0,
+                borderTopEndRadius: 50,
+                borderBottomEndRadius: 50
+              }
+            ]}>
+              <TouchableOpacity
+                accessibilityRole="button"
+                onPress={onToggle}
+                style={FloatingStyle.touchableItem}
+              >
+                <View style={FloatingStyle.toggleIconLayer}>
+                  {isShowContent ? renderToggleIcon(closeIcon) : renderToggleIcon(openIcon)}
+                </View>
+              </TouchableOpacity>
+            </View>
+          ) : null
+        }
+      </Animated.View>
     </SafeAreaView>
   );
 };
 
-export default CleanTabBar;
+export default FloatingTabBar;
