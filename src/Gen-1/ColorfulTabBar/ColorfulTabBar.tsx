@@ -8,9 +8,9 @@ import {
   SafeAreaView,
   LayoutChangeEvent,
 } from 'react-native';
-import { main_colors } from '../assets/TabColor';
-import { ColorfulStyle } from '../assets/TabStyle';
-import { hexToRGB } from '../utils/Converter';
+import { main_colors } from '../../assets/TabColor';
+import { ColorfulStyle } from '../../assets/TabStyle';
+import { hexToRGB } from '../../utils/Converter';
 import type { ColorfulTabBarConfig } from './types';
 
 const ColorfulTabBar = ({
