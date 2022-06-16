@@ -164,10 +164,7 @@ export const FloatingStyle = StyleSheet.create({
   },
   toggleItem: {
     flex: 1,
-    borderTopEndRadius: 50,
-    borderBottomEndRadius: 50
   },
   toggleIconLayer: {
-    marginBottom: 1
   }
 });

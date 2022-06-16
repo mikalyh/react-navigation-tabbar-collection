@@ -21,7 +21,6 @@ const App = () => {
         screenOptions={{ headerShown: false }}
         tabBar={(props) => <TabBar
                               {...props}
-                              height={80}
                               openIcon={({color, size}) => <Icon name="appstore-o" size={size} color={color} />}
                               closeIcon={({color, size}) => <Icon name="close" size={size} color={color} />}
         />}

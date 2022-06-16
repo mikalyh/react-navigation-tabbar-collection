@@ -17,17 +17,34 @@ const FloatingTabBar = ({
   descriptors,
   navigation,
   maxWidth = Dimensions.get('window').width - 30,
-  height,
+  height = 62,
   darkMode = false,
   colorPalette = main_colors,
   closeIcon,
-  openIcon
+  openIcon,
+  initialOpen = false,
+  floatingPosition = 'right'
 }: FloatingTabBarConfig) => {
   const BACKGROUND_COLOR = darkMode ? colorPalette.dark : colorPalette.light;
   const FOREGROUND_COLOR = darkMode ? colorPalette.light : colorPalette.dark;
 
-  const [isShowContent, setShowContent] = useState<boolean>(false)
+  const [isShowContent, setShowContent] = useState<boolean>(initialOpen)
   const toggleAnimation = useRef(new Animated.Value(0)).current;
+  let floatingPositionStyle = {};
+
+  switch(floatingPosition) {
+    case 'left':
+      floatingPositionStyle = {
+        bottom: 0,
+        left: 0
+      }
+      break;
+    default:
+      floatingPositionStyle = {
+        bottom: 0,
+        right: 0
+      }
+  }
 
   useEffect(() => {
     onToggleAnimation(isShowContent ? 1 : 0)
@@ -66,17 +83,12 @@ const FloatingTabBar = ({
 
   const widthToggle = toggleAnimation.interpolate({
     inputRange: [0, 1],
-    outputRange: [75, 600],
+    outputRange: [height, 600],
   });
 
   return (
     <SafeAreaView
-      style={[
-        FloatingStyle.container,
-        {
-          
-        },
-      ]}
+      style={FloatingStyle.container}
     >
       <Animated.View
         style={[
@@ -86,11 +98,34 @@ const FloatingTabBar = ({
             maxWidth: maxWidth,
             width: widthToggle,
             height: height,
-            bottom: 0,
-            right: 0,
           },
+          floatingPositionStyle
         ]}
       >
+        {
+          floatingPosition.includes('left') ? (
+            <View style={[
+              FloatingStyle.toggleItem,
+              {
+                backgroundColor: isShowContent ? colorPalette.dark+'12' : 'transparent',
+                borderTopStartRadius: 50,
+                borderBottomStartRadius: 50,
+                borderTopEndRadius: 0,
+                borderBottomEndRadius: 0
+              }
+            ]}>
+              <TouchableOpacity
+                accessibilityRole="button"
+                onPress={onToggle}
+                style={FloatingStyle.touchableItem}
+              >
+                <View style={FloatingStyle.toggleIconLayer}>
+                  {isShowContent ? renderToggleIcon(closeIcon) : renderToggleIcon(openIcon)}
+                </View>
+              </TouchableOpacity>
+            </View>
+          ) : null
+        }
         {state.routes.map((route, index) => {
           const focusAnimation = useRef(new Animated.Value(0)).current;
 
@@ -193,11 +228,11 @@ const FloatingTabBar = ({
 
           const translateYIcon = focusAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, -10],
+            outputRange: [0, -8],
           });
           const translateYText = focusAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, 11],
+            outputRange: [0, 13],
           });
           const scaleText = focusAnimation.interpolate({
             inputRange: [0, 0.5, 1],
@@ -258,24 +293,30 @@ const FloatingTabBar = ({
             </Animated.View>
           );
         })}
-        <View style={[
-          FloatingStyle.toggleItem,
-          {
-            backgroundColor: '#00000012',
-            borderTopStartRadius: isShowContent ? 0 : 50 ,
-            borderBottomStartRadius: isShowContent ? 0 : 50 ,
-          }
-        ]}>
-          <TouchableOpacity
-            accessibilityRole="button"
-            onPress={onToggle}
-            style={FloatingStyle.touchableItem}
-          >
-            <View style={FloatingStyle.toggleIconLayer}>
-              {isShowContent ? renderToggleIcon(closeIcon) : renderToggleIcon(openIcon)}
+        {
+          floatingPosition.includes('right') ? (
+            <View style={[
+              FloatingStyle.toggleItem,
+              {
+                backgroundColor: isShowContent ? colorPalette.dark+'12' : 'transparent',
+                borderTopStartRadius: 0,
+                borderBottomStartRadius: 0,
+                borderTopEndRadius: 50,
+                borderBottomEndRadius: 50
+              }
+            ]}>
+              <TouchableOpacity
+                accessibilityRole="button"
+                onPress={onToggle}
+                style={FloatingStyle.touchableItem}
+              >
+                <View style={FloatingStyle.toggleIconLayer}>
+                  {isShowContent ? renderToggleIcon(closeIcon) : renderToggleIcon(openIcon)}
+                </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
-        </View>
+          ) : null
+        }
       </Animated.View>
     </SafeAreaView>
   );

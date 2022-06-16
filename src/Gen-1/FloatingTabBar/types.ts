@@ -25,4 +25,5 @@ export type FloatingTabBarConfig = {
     color: string;
     size: number;
   }) => React.ReactNode;
+  floatingPosition?: 'left' | 'right';
 };
